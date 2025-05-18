@@ -1,0 +1,55 @@
+# Lista para guardar a los alumnos matriculados
+alumnos_matriculados = []
+
+# Bucle principal (estructura repetitiva)
+while True:
+    print("\n--- MATRÍCULA WETALK CIBERTEC ---")
+
+    # Entrada de datos
+    nombre = input("Nombre del alumno: ").strip()
+    estado = input("Estado del alumno (activo/inactivo): ").strip().lower()
+    deuda = input("¿Tiene deuda pendiente? (sí/no): ").strip().lower()
+
+    # Validación
+    if estado == "activo" and deuda == "no":
+        print("Alumno apto para matricularse.")
+
+        # Selección de curso
+        curso = input("Ingrese el curso (Ingles 0 / Ingles 1 / Ingles 2 / Ingles 3 / Ingles 4 / Ingles 5): ").strip()
+        sede = input("Ingrese la sede (Virtual): ").strip()
+        horario = input("Ingrese el horario (mañana / tarde / noche): ").strip().lower()
+
+        # Generar código de pago simple
+        from random import randint
+        codigo_pago = f"PAGO{nombre[:3].upper()}{randint(100,999)}"
+
+        # Mostrar factura simulada
+        print("\n--- FACTURA ---")
+        print("Alumno:", nombre)
+        print("Curso:", curso)
+        print("Sede:", sede)
+        print("Horario:", horario)
+        print("Código de pago:", codigo_pago)
+        print("--------------------")
+
+        # Guardar en la lista (como diccionario)
+        alumnos_matriculados.append({
+            "nombre": nombre,
+            "curso": curso,
+            "sede": sede,
+            "horario": horario,
+            "codigo_pago": codigo_pago
+        })
+
+    else:
+        print("El alumno no puede matricularse por tener deudas pendientes o estar inactivo.")
+
+    # Preguntar si desea registrar otro alumno
+    continuar = input("¿Desea registrar otro alumno? (sí/no): ").strip().lower()
+    if continuar != "sí":
+        break
+
+# Mostrar lista final
+print("\nLista de alumnos matriculados:")
+for alumno in alumnos_matriculados:
+    print(f"- {alumno['nombre']} ({alumno['curso']}, {alumno['sede']}, {alumno['horario']}, Código: {alumno['codigo_pago']})")
